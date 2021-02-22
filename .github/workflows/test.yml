@@ -27,7 +27,8 @@ jobs:
           mv gclone_1.51.0-mod1.3.1_Linux_x86_64 gclone
       - name: gclone accounts
         run: |
-          wget ${{ secrets.GCLONE_ACC }}
+          pip3 install gdown
+          gdown --id ${{ secrets.GCLONE_ACC }}
           unzip accounts.zip
       - name: gclone Run
         run: |
