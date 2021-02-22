@@ -25,11 +25,6 @@ jobs:
           wget https://github.com/donwa/gclone/releases/download/v1.51.0-mod1.3.1/gclone_1.51.0-mod1.3.1_Linux_x86_64.gz
           gzip -d gclone_1.51.0-mod1.3.1_Linux_x86_64.gz
           mv gclone_1.51.0-mod1.3.1_Linux_x86_64 gclone
-      - name: gclone accounts
-        run: |
-          pip3 install gdown
-          gdown --id ${{ secrets.GCLONE_ACC }}
-          unzip accounts.zip
       - name: gclone Run
         run: |
           ./gclone copy "gcl:{0AE92pFwcVSU9Uk9PVA}" "oned:/"  --stats=1s --stats-one-line -P --checkers=320 --transfers=320 --drive-pacer-min-sleep=1ms --drive-pacer-burst=5000
