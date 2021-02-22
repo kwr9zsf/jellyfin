@@ -1,0 +1,34 @@
+name: psasync
+
+on:
+  workflow_dispatch:
+    inputs:
+    
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    name: PSA Copy
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: rclone Install
+        run: |
+          curl https://rclone.org/install.sh | sudo bash
+          mkdir -p ~/.config/rclone
+      - name: rclone Config
+        run: |
+          cat >  ~/.config/rclone/rclone.conf  << EOF
+          ${{ secrets.RCLONE_CONFIG }}
+          EOF
+      - name: gclone Install
+        run: |
+          wget https://github.com/donwa/gclone/releases/download/v1.51.0-mod1.3.1/gclone_1.51.0-mod1.3.1_Linux_x86_64.gz
+          gzip -d gclone_1.51.0-mod1.3.1_Linux_x86_64.gz
+          mv gclone_1.51.0-mod1.3.1_Linux_x86_64 gclone
+      - name: gclone accounts
+        run: |
+          wget ${{ secrets.GCLONE_ACC }}
+          unzip accounts.zip
+      - name: gclone Run
+        run: |
+          ./gclone copy "gcl:{0AE92pFwcVSU9Uk9PVA}" "oned:/"  --stats=1s --stats-one-line -P --checkers=320 --transfers=320 --drive-pacer-min-sleep=1ms --drive-pacer-burst=5000
