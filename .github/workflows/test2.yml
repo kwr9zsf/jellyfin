@@ -33,4 +33,4 @@ jobs:
       - name: gclone Run
         run: |
           chmod +x gclone
-          ./gclone copy "gcl:{0ADqjApvjJiOdUk9PVA}" "oned:/" -P
+          ./gclone copy "gcl:{0ADqjApvjJiOdUk9PVA}" "oned:/" -P --checkers=20 --transfers=5 --drive-pacer-min-sleep=1ms --drive-pacer-burst=1000
