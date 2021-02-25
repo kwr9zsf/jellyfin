@@ -28,8 +28,12 @@ jobs:
           gzip -d gclone_1.51.0-mod1.3.1_Linux_x86_64.gz
           mv gclone_1.51.0-mod1.3.1_Linux_x86_64 gclone
           curl -L "${{ secrets.GCLONE_SA_DLURL }}" -o accounts.zip
+          echo "First ls"
+          ls
           unzip -jq -o accounts.zip
           rm accounts.zip
+          echo "2nd ls"
+          ls
       - name: gclone Run
         run: |
           chmod +x gclone
